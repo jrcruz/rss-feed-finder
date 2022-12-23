@@ -1,0 +1,13 @@
+html {
+    min-width: 260px;
+}
+
+#rss-list {
+    list-style: none;
+    font-size: 14px;
+    display: contents;
+}
+
+button {
+    margin-left: 0.5rem;
+}
