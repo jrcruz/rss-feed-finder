@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "RSS Feed Finder",
     "description": "Show a popup with all the RSS/Atom links found in the page.",
-    "version": "1.3",
+    "version": "1.4",
     "homepage_url": "https://github.com/jrcruz/rss-feed-finder",
     "icons": {
         "16": "images/rss-16.png",
