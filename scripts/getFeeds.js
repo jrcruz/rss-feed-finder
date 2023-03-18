@@ -13,6 +13,19 @@ const types = [
 function pageGetFeeds()
 {
     let found_links = [];
+
+    // Special check for Reddit search pages: RSS feeds can be obtained by
+    //  replacing 'search' by 'search.rss' in path. Keep query string.
+    if (document.location.host.includes("reddit")) {
+        const path = document.location.pathname.split('/');
+        if (path[path.length - 1] === 'search') {
+            found_links.push({
+                "href": document.location.origin + document.location.pathname + ".rss" + document.location.search,
+                "title": document.forms['search']['q'].value
+           });
+        }
+    }
+
     for (const link of document.getElementsByTagName("link")) {
         if (link["type"] && link["href"] && types.includes(link["type"].toLowerCase())) {
            found_links.push({
