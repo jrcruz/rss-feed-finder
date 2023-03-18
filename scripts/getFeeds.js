@@ -38,22 +38,26 @@ function pageGetFeeds()
 }
 
 
-function pageHasFeeds()
+function pageHasFeeds(feed_list)
 {
-    for (const link of document.getElementsByTagName("link")) {
-        if (link["type"] && link["href"] && types.includes(link["type"].toLowerCase())) {
-            return {"exists": "found"};
-        }
+    if (feed_list.length > 0) {
+        return {"exists": "found"};
     }
-    return {"exists": "not found"};
+    else {
+        return {"exists": "not found"};
+    }
 }
+
+
+// Called on add-on load.
+const feeds = pageGetFeeds();
 
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request["text"] == "simple-rss-extractor-get-feeds") {
-        sendResponse(JSON.stringify(pageGetFeeds()));
+        sendResponse(JSON.stringify(feeds));
     }
     else if (request["text"] == "simple-rss-extractor-set-icon") {
-        sendResponse(JSON.stringify(pageHasFeeds()));
+        sendResponse(JSON.stringify(pageHasFeeds(feeds)));
     }
 });
